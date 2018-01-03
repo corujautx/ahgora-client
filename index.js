@@ -3,8 +3,8 @@
 const program = require('commander');
 const puppeteer = require('puppeteer');
 const packageInfo = require('./package');
-const { SELECTORS, KEYS } = require('./constants');
 const { createConfiguration } = require('./config');
+const selectors = require('./selectors');
 
 program
   .name(packageInfo.name)
@@ -22,26 +22,19 @@ program
     });
 
     // Authenticate the device
-    await page.evaluate(
-      (KEYS, config) => {
-        localStorage.setItem(KEYS.device.identity, config.device.identity);
-        localStorage.setItem(
-          KEYS.device.companyName,
-          config.device.companyName
-        );
-      },
-      KEYS,
-      config
-    );
+    await page.evaluate(config => {
+      localStorage.pontoweb_identity = config.device.identity;
+      localStorage.company_name = config.device.companyName;
+    }, config);
 
-    await page.click(SELECTORS.account);
+    await page.click(selectors.account);
     await page.keyboard.type(config.credentials.account);
 
-    await page.click(SELECTORS.password);
+    await page.click(selectors.password);
     await page.keyboard.type(config.credentials.password);
 
-    await page.click(SELECTORS.button);
-    await page.waitFor(SELECTORS.successMessage);
+    await page.click(selectors.button);
+    await page.waitFor(selectors.successMessage);
 
     await browser.close();
   });
