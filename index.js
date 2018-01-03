@@ -3,8 +3,8 @@
 const program = require('commander');
 const puppeteer = require('puppeteer');
 const packageInfo = require('./package');
-const { createConfiguration } = require('./config');
-const selectors = require('./selectors');
+const { createConfiguration } = require('./lib/config');
+const selectors = require('./lib/selectors');
 
 program
   .name(packageInfo.name)
