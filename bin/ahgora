@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+basedir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+node $basedir/../index.js $*
