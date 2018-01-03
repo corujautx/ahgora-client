@@ -1,6 +1,6 @@
 {
-  "name": "ahgora-client",
-  "version": "0.1.0",
+  "name": "ahgora",
+  "version": "0.1.2",
   "description": "A client for Ahgora, an application that manages working hours",
   "main": "index.js",
   "repository": "https://github.com/fellipecaetano/ahgora-client",

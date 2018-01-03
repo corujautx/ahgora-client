@@ -7,6 +7,7 @@ const { SELECTORS, KEYS } = require('./constants');
 const { createConfiguration } = require('./config');
 
 program
+  .name(packageInfo.name)
   .version(packageInfo.version)
   .command('punch')
   .description('register a new card punch')
@@ -39,8 +40,15 @@ program
     await page.click(SELECTORS.password);
     await page.keyboard.type(config.credentials.password);
 
-    await page.waitFor(3000);
+    await page.click(SELECTORS.button);
+    await page.waitFor(SELECTORS.successMessage);
+
     await browser.close();
   });
 
 program.parse(process.argv);
+
+// If no arguments were supplied, output help and exit
+if (!process.argv.slice(2).length) {
+  program.help();
+}
